@@ -1,47 +1,42 @@
 using System;
 
-namespace myApp
+namespace MyApp
+
 {
     class Program
     {
-        static void Main(string[] args)
-        {
-            Triangle triangle = new Triangle();
-            Console.WriteLine("Программа определяет тип треугольника по введенным длинам сторон :");
-            Console.WriteLine();
-            Console.WriteLine("Пожалуйста, введите длину первой стороны треугольника :");
-            double one = double.Parse(Console.ReadLine());
-            Console.WriteLine("Пожалуйста, введите длину второй стороны треугольника :");
-            double two = double.Parse(Console.ReadLine());
-            Console.WriteLine("Пожалуйста, введите длину третьей стороны треугольника :");
-            double three = double.Parse(Console.ReadLine());
-            string getFormTrianling = triangle.FormTriangling(one, two, three);
-            Console.WriteLine(getFormTrianling);
-            Console.ReadKey();
+        static void Main() {
+            hello();
+            runSolution();
         }
-        public class Triangle
-        {
-            public string FormTriangling(double one, double two, double three)
+
+        private static void runSolution() {
+            string sol = Console.ReadLine();
+            Console.WriteLine(sol);
+            switch (sol)
             {
-                if (one <= 0 || two <= 0 || three <= 0 || one + two <= three || one + three <= two || two + three <= one)
-                {
-                    return "Треугольника с такими сторонами не существует!!!";
-                }
-                if (one == two && one == three && two == three)
-                {
-                    return "Треугольник равносторонний!";
-                }
-                if (((one * one) == (two * two) + (three * three)) || ((two * two) == ((one * one) + (three * three)) || ((three * three) == (two * two) + (one * one))))
-                {
-                    return "Треугольник прямоугольный!";
-                }
-                if ((one == two && one != three) || (two == three && two != one) || (one == three && one != two))
-                {
-                    return "Треугольник равнобедренный!";
-                }
-                return "Треугольник разносторонний!";
+                case "1":
+                    Console.WriteLine("Вызов публичного метода");
+                    var mod1 = new Solutions.Modificators();
+                    Console.WriteLine(mod1.GetNextValue());
+
+                    Console.WriteLine("Вызов protected из наследника");
+                    var mod2 = new Solutions.Modificators.MySubClass();
+                    Console.WriteLine(mod2.Method2());
+
+                    break;
+                default:
+                    Console.WriteLine("Неверные вводные данные. Попробуйте еще раз.");
+                    runSolution();
+                    break;
             }
         }
-    }
 
+        private static void hello() {
+            Console.WriteLine("Привет! Выберите решение");
+            Console.WriteLine("1. Модификаторы доступа");
+            Console.WriteLine("2. Задание 1");
+            Console.WriteLine("3. Задание 2");
+        }
+    }
 }
